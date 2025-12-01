@@ -1,5 +1,5 @@
 def turn_dial(position, line, clicks):
-    direction, rotations = split_line(line)
+    direction, rotations = line[0], int(line[1:])
     while rotations > 99:
         clicks += 1
         rotations -= 100
@@ -14,9 +14,6 @@ def turn_dial(position, line, clicks):
         position -= rotations
 
     return position % 100, clicks
-
-def split_line(line):
-    return line[0], int(line[1:])
 
 with open("Day1/data.txt", "r") as file:
     lines = file.read().splitlines()
