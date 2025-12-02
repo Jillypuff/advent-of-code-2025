@@ -1,0 +1,8 @@
+Lessons from solving todays problem:
+- Pythons for i in range(1,10) will print 1-9 so if you want to have all the values you have to add 1
+- To split numbers it's best to convert them to string first
+- string[x:] and string[:x] splits the string at x index
+
+The biggest problem I solved was how to pick apart the string piece by piece and compare each of the sequence based on the sequence_size.
+I also added if length % i == 0 to make sure that the id was able to be evenly split up in that many parts because otherwise we already know it's not repeating.
+The next_sequence, id = id[:sequence_size], id[sequence_size:] came from wanting to pop out some size from start of the string and it worked better than expected.
