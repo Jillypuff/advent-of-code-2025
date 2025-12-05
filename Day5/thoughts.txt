@@ -1,0 +1,26 @@
+Today was a mess of a solution. Step 1 was to find the correct dataset to store the large ranges without crashing.
+My first brilliant idea was to put each value of the range inside a set so that overlap would take care of itself.
+My computer almost instantly froze as trillions of values beeing added, so I needed a new approach.
+I settled on simply keeping the string values and only converting them when I needed to evaluate.
+This seemed like a fine method memory wise and I could still do every check I wanted so I went with it.
+This was also the day I submited the most incorrect answers since I kept missing cornercases and had to rewrite it over and over again.
+Luckily I never had to tear everything down since my logic was sound and I could just built on it to add each cornercase.
+The things I didn't consider at first but had to implement one by one:
+- Problem: Just because the new_start was in the range doesn't mean the new_end is larger than the end.
+- Solution: Add the max(new_end, end), and min for start.
+
+- Problem: What if instead of beeing inside the range, the whole range was contained in the new range.
+- Solution: Add a new elif to check if that's true and make the whole index the new start and end.
+
+- Problem: The count_fresh_ids came back with incorrect values.
+- Solution: end - start will not include each value so I had to add + 1 to account to that.
+
+- Problem: The arrays after a loop was acting... odd.
+- Solution: Copy the values, not the reference. Copy the values, not the reference. Copy the values, not the reference.
+
+- Problem: If a new_range would intersect with multiple ranges it would only converge with one of them.
+- Solution: Added a loop to redo the combining until no changes where detected.
+
+Somehow I got there in the end and I'm happy with my solution.
+Main lesson learned:
+Sets are great but computationally heavy for large amount of values.
