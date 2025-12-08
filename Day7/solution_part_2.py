@@ -3,28 +3,27 @@ class Coords():
         self.y = y
         self.x = x
 
-def find_split(y, x):
-    print(y)
-    for i in range(y, height - 1):
+def memoize(func):
+    cache = {}
+    def wrapper(coord):
+        key = (coord.y, coord.x)
+        if key not in cache:
+            cache[key] = func(coord)
+        return cache[key]
+    return wrapper
+
+@memoize
+def recursive_find_split(coord) -> int:
+    y = coord.y
+    x = coord.x
+    for i in range(y, height):
         if lines[i][x] == splitter:
-            return Coords(i, x)
-    return None
+            return recursive_find_split(Coords(i + 1, x - 1)) + recursive_find_split(Coords(i + 1, x + 1))
+    return 1
 
 with open("Day7/data.txt", "r") as file:
     lines = file.read().splitlines()
-#lines[y][x]
 
 start = Coords(0, lines[0].index("S"))
-tachyon_particles = []
-tachyon_particles.append(start)
-splits, splitter, height = 0, '^', len(lines)
-while tachyon_particles:
-    current = tachyon_particles.pop()
-    split_coord = find_split(current.y, current.x)
-    print(len(tachyon_particles))
-    if split_coord:
-        splits += 1
-        tachyon_particles.append(Coords(split_coord.y - 1, split_coord.x - 1))
-        tachyon_particles.append(Coords(split_coord.y - 1, split_coord.x + 1))
-
-print(splits)
+splitter, height = "^", len(lines)
+print(recursive_find_split(start))
