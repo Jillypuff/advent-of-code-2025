@@ -3,7 +3,6 @@ class Coords():
         self.x = x
         self.y = y
         self.z = z
-        self.solo = True
 
 class Distance():
     def __init__(self, coord1, coord2, distance):
