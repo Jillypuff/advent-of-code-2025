@@ -28,7 +28,7 @@ for index, coord in enumerate(coords):
 distances.sort(key=lambda x: x.distance)
 
 circuits = []
-for i in range(0, len(distances)):
+for i in range(0, 1000):
     new_circuit = [distances[i].coord1, distances[i].coord2]
     a, b = -1, -1
     for j, circuit in enumerate(circuits):
